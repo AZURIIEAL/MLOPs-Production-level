@@ -1,7 +1,11 @@
 from abc import ABC, abstractmethod
+import sys
 import pandas as pd
 import zipfile
 import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'shared'))
+
 from constants import (
     EXTENSION_ZIP,
     EXTENSION_CSV,
@@ -55,3 +59,15 @@ class DataIngestorFactory:
             return ZipDataIngester()
         else:
             raise ValueError(f"{NO_INGESTOR_AVAILABLE} : {file_extension}")
+
+def main():
+    file_path = "data/archive.zip"  
+    file_extension = os.path.splitext(file_path)[1]
+    print(file_extension)
+    factory = DataIngestorFactory()
+    data_ingestor = factory.get_data_ingestor(file_extension)
+    df = data_ingestor.ingest(file_path)
+    print(df.head())
+
+if __name__ == "__main__":
+    main()
