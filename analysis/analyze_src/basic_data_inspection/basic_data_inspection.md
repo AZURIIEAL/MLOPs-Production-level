@@ -1,6 +1,6 @@
-# Project Summary
+# Class Summary
 
-## Project Overview
+## Class Overview
 
 **Overall Purpose**:  
 The code implements a framework for data inspection, allowing users to analyze DataFrames (specifically from the Pandas library) using different strategies. The primary goal is to provide insights into data types and summary statistics of the DataFrame.
