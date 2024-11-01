@@ -53,21 +53,11 @@ class ZipDataIngester(DataIngester):
         return pd.read_csv(csv_file_path)
 
 class DataIngestorFactory:
-    def get_data_ingestor(self, file_extension: str) -> DataIngester:
+    @staticmethod
+    def get_data_ingestor(file_extension: str) -> DataIngester:
         """Return an appropriate data ingester based on the file extension."""
         if file_extension == EXTENSION_ZIP:
             return ZipDataIngester()
         else:
             raise ValueError(f"{NO_INGESTOR_AVAILABLE} : {file_extension}")
 
-def main():
-    file_path = "data/archive.zip"  
-    file_extension = os.path.splitext(file_path)[1]
-    print(file_extension)
-    factory = DataIngestorFactory()
-    data_ingestor = factory.get_data_ingestor(file_extension)
-    df = data_ingestor.ingest(file_path)
-    print(df.head())
-
-if __name__ == "__main__":
-    main()
